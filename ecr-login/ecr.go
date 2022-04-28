@@ -71,13 +71,15 @@ func NewECRHelper(opts ...Option) *ECRHelper {
 var _ credentials.Helper = (*ECRHelper)(nil)
 
 func (ECRHelper) Add(creds *credentials.Credentials) error {
-	// This does not seem to get called
-	return notImplemented
+	// This is added so that login calls are a no-op
+	// Without this, automation that relies upon login fails
+	return nil
 }
 
 func (ECRHelper) Delete(serverURL string) error {
-	// This does not seem to get called
-	return notImplemented
+	// This is added so that logout calls are a no-op
+	// Without this, automation that relies upon logout fails
+	return nil
 }
 
 func (self ECRHelper) Get(serverURL string) (string, string, error) {

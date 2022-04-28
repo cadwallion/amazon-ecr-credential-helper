@@ -118,3 +118,27 @@ func TestListFailure(t *testing.T) {
 	assert.Error(t, err)
 	assert.Len(t, serverList, 0)
 }
+
+func TestAddIgnored(t *testing.T) {
+	factory := &mock_api.MockClientFactory{}
+
+	helper := NewECRHelper(WithClientFactory(factory))
+
+	err := helper.Add(&credentials.Credentials{
+		ServerURL: proxyEndpoint,
+		Username: expectedUsername,
+		Secret: expectedPassword,
+	})
+
+	assert.Nil(t, err)
+}
+
+func TestDeleteIgnored(t *testing.T) {
+	factory := &mock_api.MockClientFactory{}
+
+	helper := NewECRHelper(WithClientFactory(factory))
+
+	err := helper.Delete(proxyEndpoint)
+
+	assert.Nil(t, err)
+}
